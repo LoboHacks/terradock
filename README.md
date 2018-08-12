@@ -19,7 +19,7 @@ $ mkdir -p ~/bin/
 $ ln -s terradock ~/bin/
 $ chmod +x terradock # Just to be sure..
 ...
-
+```
 ## Usage
 
 ```bash
