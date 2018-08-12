@@ -1,9 +1,12 @@
 # terradock
-Shell wrapper script to run terraform from docker with credentials support for AWS and Azure.
+Shell wrapper script to run terraform from docker with credentials support for AWS and Azure. 
+
+The script uses docker images from the official [Hashicorp Docker Hub Terraform repo](https://hub.docker.com/r/hashicorp/terraform/).
+
 
 ## Requirements
 1. *nix OS
-2. docker
+2. Docker runtime
 
 ## Installation
 ```bash
@@ -35,7 +38,7 @@ $ terradock apply
 ```
 
 ```bash
-# Run specific Terraform version
+# Run a specific Terraform version
 $ TF_VERSION=0.9.1 terradock --version
 Terraform v0.9.1
 
@@ -50,7 +53,7 @@ $ TF_VERSION=0.9.1 terradock apply
 ```
 or
 ```bash
-# Run specific Terraform version
+# Run a specific Terraform version
 $ export TF_VERSION=0.9.1
 $ terradock --version
 Terraform v0.9.1
@@ -88,3 +91,9 @@ $ export ARM_TENANT_ID=00-000-000-000-00
 $ terradock init
 ```
 Reference: <https://www.terraform.io/docs/providers/azurerm/index.html#argument-reference>
+
+## Release
+
+```sh
+$ make release
+```
