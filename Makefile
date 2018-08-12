@@ -1,9 +1,9 @@
-all: clean init release
+.PHONY: all clean release
 
-init:
+all: clean release
+
+release: terradock LICENSE README.md
 	mkdir -p $(PWD)/release/
-
-release: init $(PWD)/terradock $(PWD)/LICENSE $(PWD)/README.md
 	zip $(PWD)/release/terradock.zip terradock LICENSE README.md
 
 clean:
