@@ -63,25 +63,28 @@ $ terradock plan
 ...
 $ terradock apply
 ...
+$ unset TF_VERSION
 ```
 
 ## Credentials
 
 ### AWS
 **terradock** will make all AWS related environment variables (starting with `AWS_`) available to the docker container.
-Also it will pass the AWS-Home of the current user (*~/.aws*) with *Read-only* permissions to the container.
+Also it will pass the AWS-Home of the current user (*~/.aws/*) with *read-only* permissions to the container.
 
 ### Azure
-`az login` is not supported.
 **terradock** will make all Azure related environment variables (starting with `ARM_`) available to the docker container.
+Also it will pass the Azure-Home of the current user (*~/.azure/*) with *read-only* permissions to the container.
 
-Please follow the documentation at: https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html ; to setup a SPN and set all for authentication required environment variables (recommended).
-Reference: https://www.terraform.io/docs/providers/azurerm/index.html#argument-reference
+#### Azure authentication with a SPN
+Please follow the instructions in the [Terraform AzureRM Provider authentication documentation](https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html) to setup a SPN.
 
-E.g.:
+
+Example for authentication with a SPN:
 ```sh
 $ export ARM_CLIENT_ID=00-000-000-000-00
 $ export ARM_CLIENT_SECRET=0000000000000
 $ export ARM_TENANT_ID=00-000-000-000-00
 $ terradock init
 ```
+Reference: <https://www.terraform.io/docs/providers/azurerm/index.html#argument-reference>

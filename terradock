@@ -4,8 +4,10 @@
 TF_DEFAULT_VERSION=latest
 # Location where temp environment variable is stored.
 TERRADOCK_HOME=${HOME}/.terradock
-# AWS HOME taht will be passed to the Docker container.
+# AWS HOME that will be passed to the Docker container.
 AWS_HOME=${HOME}/.aws
+# Azure HOME that will be passed to the Docker container.
+AZ_HOME=${HOME}/.azure
 
 # Create Terradock home folder
 mkdir -p ${TERRADOCK_HOME}
@@ -25,9 +27,11 @@ docker run \
     --rm \
     -it \
     -v ${AWS_HOME}:/root/.aws/:ro \
+    -v ${AZ_HOME}:/root/.azure/:ro \
     -v ${PWD}:/app/ \
     -w /app/ \
     --env-file ${TERRADOCK_HOME}/env \
     hashicorp/terraform:${TF_VERSION} "$@"
 
+# Cleanup temporary env file.
 rm ${TERRADOCK_HOME}/env
