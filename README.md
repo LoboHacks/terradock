@@ -13,15 +13,13 @@ The script uses docker images from the official [Hashicorp Docker Hub Terraform 
 # Install script to /usr/local/bin/ (requires sudo/root permissions)
 $ sudo cp terradock /usr/local/bin/
 $ sudo chmod +x /usr/local/bin/terradock # Just to be sure..
-...
 ```
 or
 ```bash
 # Link script to ~/bin/ (may require you to modify your *sh PATH)
 $ mkdir -p ~/bin/
-$ ln -s terradock ~/bin/
+$ ln -s $PWD/terradock ~/bin/terradock 
 $ chmod +x terradock # Just to be sure..
-...
 ```
 ## Usage
 
