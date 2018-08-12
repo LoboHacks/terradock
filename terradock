@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Version of Terraform to use if TF_VERSION is not set.
+TF_DEFAULT_VERSION=latest
+# Location where temp environment variable is stored.
+TERRADOCK_HOME=${HOME}/.terradock
+# AWS HOME taht will be passed to the Docker container.
+AWS_HOME=${HOME}/.aws
+
+# Create Terradock home folder
+mkdir -p ${TERRADOCK_HOME}
+chmod 700 ${TERRADOCK_HOME}
+
+# Save AWS and Azure credential related environment variables in temporary env file.
+printenv|grep -e '^ARM_.*' -e '^AWS_.*' > ${TERRADOCK_HOME}/env
+chmod 600 ${TERRADOCK_HOME}/env
+
+# If TF_VERSION is not set use TF_DEFAULT_VERSION
+if [ -z ${TF_VERSION+x} ]
+then
+    TF_VERSION=${TF_DEFAULT_VERSION}
+fi
+
+docker run \
+    --rm \
+    -it \
+    -v ${AWS_HOME}:/root/.aws/:ro \
+    -v ${PWD}:/app/ \
+    -w /app/ \
+    --env-file ${TERRADOCK_HOME}/env \
+    hashicorp/terraform:${TF_VERSION} "$@"
+
+rm ${TERRADOCK_HOME}/env
