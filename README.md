@@ -11,18 +11,22 @@ The script uses docker images from the official [Hashicorp Docker Hub Terraform 
 ## Installation
 ```bash
 # Install script to /usr/local/bin/ (requires sudo/root permissions)
-$ sudo cp terradock /usr/local/bin/
-$ sudo chmod +x /usr/local/bin/terradock # Just to be sure..
+$ sudo curl -s https://api.github.com/repos/LoboHacks/terradock/releases/latest | \
+grep browser_download_url | cut -d '"' -f 4 | head -n 1 | \
+awk '{print "--url \""$1"\""}' | curl -L -s --config - > /usr/local/bin/terradock && \
+sudo chmod +x /usr/local/bin/terradock
 ```
 or
 ```bash
-# Link script to ~/bin/ (may require you to modify your *sh PATH)
+# Install script to ~/bin/
 $ mkdir -p ~/bin/
-$ ln -s $PWD/terradock ~/bin/terradock 
-$ chmod +x terradock # Just to be sure..
+$ curl -s https://api.github.com/repos/LoboHacks/terradock/releases/latest | \
+grep browser_download_url | cut -d '"' -f 4 | head -n 1 | \
+awk '{print "--url \""$1"\""}' | curl -L -s --config - > ~/bin/terradock && \
+chmod +x ~/bin/terradock
+$ export PATH=$PATH:$HOME/bin # You should persist that in your *sh profile
 ```
 ## Usage
-
 ```bash
 # Run latest Terraform version
 $ terradock --version
