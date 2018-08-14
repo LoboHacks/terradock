@@ -11,19 +11,15 @@ The script uses docker images from the official [Hashicorp Docker Hub Terraform 
 ## Installation
 ```bash
 # Install script to /usr/local/bin/ (requires sudo/root permissions)
-$ sudo curl -s https://api.github.com/repos/LoboHacks/terradock/releases/latest | \
-grep browser_download_url | cut -d '"' -f 4 | head -n 1 | \
-awk '{print "--url \""$1"\""}' | curl -L -s --config - > /usr/local/bin/terradock && \
-sudo chmod +x /usr/local/bin/terradock
+$ sudo curl -s -L https://raw.githubusercontent.com/LoboHacks/terradock/master/terradock > /usr/local/bin/terradock
+$ sudo chmod +x /usr/local/bin/terradock
 ```
 or
 ```bash
 # Install script to ~/bin/
 $ mkdir -p ~/bin/
-$ curl -s https://api.github.com/repos/LoboHacks/terradock/releases/latest | \
-grep browser_download_url | cut -d '"' -f 4 | head -n 1 | \
-awk '{print "--url \""$1"\""}' | curl -L -s --config - > ~/bin/terradock && \
-chmod +x ~/bin/terradock
+$ curl -s -L https://raw.githubusercontent.com/LoboHacks/terradock/master/terradock > ~/bin/terradock
+$ chmod +x ~/bin/terradock
 $ export PATH=$PATH:$HOME/bin # You should persist that in your *sh profile
 ```
 ## Usage
